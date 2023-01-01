@@ -9,8 +9,18 @@
 <template>
   <div class="container">
     <custom-search v-model="searchVal"></custom-search>
-    <div v-for="item in posts" :key="item.id">
-      {{item}}
+    <div
+        class="container__item"
+        v-if="posts.length > 1"
+        v-for="item in posts"
+        :key="item.id"
+    >
+      <h2>{{item.title}}</h2>
+      <h4>{{item.body}}</h4>
+    </div>
+    <div v-else>
+      <h2>{{posts.title}}</h2>
+      <h4>{{posts.body}}</h4>
     </div>
   </div>
 </template>
