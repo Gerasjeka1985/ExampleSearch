@@ -1,5 +1,7 @@
 <script setup lang="ts">
   import {CustomPostsTypes} from "~/types/CustoPostsTypes";
+  import {ref} from "vue";
+  const val = ref('')
 
   const props = defineProps<{
     posts: CustomPostsTypes[]
@@ -14,15 +16,31 @@
         v-for="item in posts"
         :key="item.id"
     >
-      <h2>{{item.title}}</h2>
-      <h4>{{item.body}}</h4>
+      <h3>
+        <strong>Название поста : </strong>
+        <br />
+          <span style="color: blue">{{item.title}}</span>
+      </h3>
+      <h4>
+        <strong>Описание поста</strong>
+        <br />
+        <span>{{item.body}}</span>
+      </h4>
     </li>
     <li
         v-else
         class="posts__item"
     >
-      <h2>{{posts.title}}</h2>
-      <h4>{{posts.body}}</h4>
+      <h3>
+        <strong>Название поста : </strong>
+        <br />
+        <span style="color: blue">{{posts.title}}</span>
+      </h3>
+      <h4>
+        <strong>Описание поста</strong>
+        <br />
+        <span>{{posts.body}}</span>
+      </h4>
     </li>
   </ul>
 </template>
