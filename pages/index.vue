@@ -1,24 +1,27 @@
 <script setup lang="ts">
+  import { ref } from "vue";
   import CustomSearch from "~/components/atoms/CustomSearch.vue";
+  const runtimeConfig = useRuntimeConfig();
+  const searchVal = ref('');
+  const {data: posts,refresh,error, pending} = await useFetch(() => `${searchVal.value}`,{baseURL: runtimeConfig.apiBase});
 
-  const {data: posts} = await useFetch('https://jsonplaceholder.typicode.com/posts');
+  const handler = () => {
+    refresh()
+  }
 </script>
 
 <template>
   <div class="container">
-    <custom-search></custom-search>
+    <custom-search v-model="searchVal">
+      <button
+          @click.prevent="handler"
+      >
+        Обновить
+      </button>
+    </custom-search>
     <ol>
       <li class="container__item" v-for="item in posts" :key="item.id">
-        <div>
-          <h2>
-            {{item.title}}
-          </h2>
-        </div>
-        <div>
-          <p>
-            {{item.body}}
-          </p>
-        </div>
+          {{item}}
       </li>
     </ol>
   </div>

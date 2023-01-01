@@ -1,11 +1,20 @@
 <script setup lang="ts">
-import {ref} from 'vue';
+import {computed} from 'vue';
 
-const searchValue = ref("");
+const props = defineProps<{
+  modelValue?: string
+}>();
 
-const handler = (val: any) => {
-  console.log(val);
-}
+const emit = defineEmits(["update:modelValue"]);
+
+const searchValue = computed({
+  get(){
+    return props.modelValue
+  },
+    set(value?: string){
+      emit("update:modelValue", value);
+    },
+});
 </script>
 
 <template>
@@ -16,12 +25,7 @@ const handler = (val: any) => {
         placeholder="введите название альбома"
         v-model="searchValue"
     />
-    <button
-        class="search_btn"
-        @click.prevent="handler(searchValue)"
-    >
-      Сортировать
-    </button>
   </form>
+  <slot></slot>
 </template>
 
