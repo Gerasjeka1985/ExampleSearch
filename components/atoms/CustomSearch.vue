@@ -22,7 +22,7 @@ const searchValue = computed({
     <input
         class="search__ipt"
         type="search"
-        placeholder="введите название альбома"
+        placeholder="введите номер поста"
         v-model="searchValue"
     />
   </form>
