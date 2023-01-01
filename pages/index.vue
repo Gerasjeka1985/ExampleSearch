@@ -4,26 +4,14 @@
   const runtimeConfig = useRuntimeConfig();
   const searchVal = ref('');
   const {data: posts,refresh,error, pending} = await useFetch(() => `${searchVal.value}`,{baseURL: runtimeConfig.apiBase});
-
-  const handler = () => {
-    refresh()
-  }
 </script>
 
 <template>
   <div class="container">
-    <custom-search v-model="searchVal">
-      <button
-          @click.prevent="handler"
-      >
-        Обновить
-      </button>
-    </custom-search>
-    <ol>
-      <li class="container__item" v-for="item in posts" :key="item.id">
-          {{item}}
-      </li>
-    </ol>
+    <custom-search v-model="searchVal"></custom-search>
+    <div v-for="item in posts" :key="item.id">
+      {{item}}
+    </div>
   </div>
 </template>
 
